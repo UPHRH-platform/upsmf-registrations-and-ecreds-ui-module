@@ -49,6 +49,8 @@ export interface ClaimsTableData {
   }
   export interface studentDetails {
     registrationType: string,
+    name:string,
+    phoneNumber:string,
     council: string,
     email: string,
     mothersName: string,
@@ -60,9 +62,9 @@ export interface ClaimsTableData {
     courseName: string,
     nursingCollage: string,
     joiningMonth: string,
-    joiningYear:  number,
+    joiningYear:  string,
     passingMonth: string,
-    passingYear: number,
+    passingYear: string,
     finalYearRollNo:string,
     examBody: string    
   }

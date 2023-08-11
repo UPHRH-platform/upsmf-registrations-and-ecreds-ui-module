@@ -3,6 +3,27 @@
     <div class="secondary-container">
         <h2 class="title-header">Claim Registration certificate</h2>
         <span class="cards-boxes"  >
+           
+            <!-- Display admin-specific card -->
+            <ng-container *ngIf="isStudent">
+                <mat-card class="example-card" (click)="navigateto(studentCards)">
+                    <mat-card-content class="content-container">
+                         <span class="title-section">{{studentCards.title}}</span>
+                         <span class="desc-section">{{studentCards.description}}</span>
+                         <button class="apply-button" mat-stroked-button color="primary" routerLink="/claims/new">Apply </button>
+                    </mat-card-content>
+                </mat-card>
+            </ng-container>
+             <!-- Display student-specific cards -->
+             <ng-container *ngIf="!isStudent">
+                <mat-card class="example-card" *ngFor="let item of adminCards" (click)="navigateto(item)">
+                    <mat-card-content class="content-container">
+                         <span class="title-section">{{item.title}}</span>
+                         <span class="desc-section">{{item.description}}</span>
+                         <button class="apply-button" mat-stroked-button color="primary" routerLink="/claims/new">Apply </button>
+                    </mat-card-content>
+                </mat-card>
+            </ng-container>
             <mat-card class="example-card" *ngFor="let item of cardList" (click)="navigateto(item)">
                 <!-- <a routerlink="manageuser">swe</a> -->
                 <mat-card-content class="content-container" >
@@ -11,7 +32,7 @@
 
                      <button class="apply-button" mat-stroked-button color="primary" routerLink="/claims/new">Apply </button>
                 </mat-card-content>
-              </mat-card>
-            </span>
+            </mat-card>
+        </span>
     </div>
 </div>

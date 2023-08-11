@@ -74,10 +74,10 @@ export class NewRegnCertDetailsComponent {
         Validators.required]),
       gender: new FormControl('Male', [
         Validators.required]),
-      email: new FormControl('arun@awe.com', [
+      email: new FormControl('', [
         Validators.required,
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-      mobNumber: new FormControl('8989786756', [
+      mobNumber: new FormControl('', [
         Validators.required,
         Validators.pattern("^(0|91)?[6-9][0-9]{9}$")]),
       });
@@ -89,12 +89,12 @@ export class NewRegnCertDetailsComponent {
           Validators.required]),
           examBody: new FormControl('', [
           Validators.required]),
-          joinDate: new FormControl('08/08/2023', [
+          joinDate: new FormControl('', [
           Validators.required]),
           rollNum: new FormControl('', [
           Validators.required,
           Validators.pattern("^[0-9]*$")]),
-          passDate: new FormControl('08/08/2023', [
+          passDate: new FormControl('', [
           Validators.required])
         });
         
@@ -113,15 +113,23 @@ export class NewRegnCertDetailsComponent {
       var applicant_details = this?.newRegCertDetailsformGroup?.value;
       var course_details = this?.newRegCourseDetailsformGroup?.value;
       var data = this.stateData;
-      // console.log("first form",data)
-      // console.log(applicant_details)
-      // console.log("course",course_details)
+      const dob = new Date(data.body.endDate);
+      const year = dob.getFullYear();
+      const month = String(dob.getMonth() + 1).padStart(2, '0');
+      const day = String(dob.getDate()).padStart(2, '0');
+  
+     const dateobbirth = `${year}-${month}-${day}`;
+      console.log("first form",data)
+      console.log(applicant_details)
+      console.log("course",course_details)
       const joinDate = new Date(course_details.joinDate);
       const passDate = new Date(course_details.passDate);
       const jMonth = joinDate.getMonth();
       const pMonth = passDate.getMonth();
-      const joinYear = joinDate.getFullYear();
-      const passYear = joinDate.getFullYear();
+      const joinYear:any = joinDate.getFullYear().toString();
+      const passYear :any= joinDate.getFullYear().toString();
+     
+
 
     const months = [
       'January', 'February', 'March', 'April', 'May', 'June',
@@ -131,16 +139,19 @@ export class NewRegnCertDetailsComponent {
     const passMonth = months[pMonth];
 
      
-      var updateStudent ={
+      let updateStudent ={
         
-        registrationType: data.body.degree,
+        
+        registrationType: data.body.courseType,
+        name:applicant_details.applicantName,
+        phoneNumber:applicant_details.mobNumber,
         council: data.body.councilName,
         email: applicant_details.email,
         mothersName: applicant_details.motherName,
         fathersName: applicant_details.fatherName,
-        dateOfBirth: applicant_details.dateOfBirth,
-        // date: string,
-        aadhaarNo: applicant_details.aadhaarNo,
+        dateOfBirth: dateobbirth,
+      
+        aadhaarNo: applicant_details.adhr,
         gender: applicant_details.gender,
         courseName: data.body.claimType,
         nursingCollage: course_details.collegeName,
@@ -149,29 +160,34 @@ export class NewRegnCertDetailsComponent {
         joiningYear: joinYear,
         passingMonth: passMonth,
         passingYear: passYear,
-        finalYearRollNo: course_details.rollNo,
-        examBody: course_details.examBody
+        finalYearRollNo: course_details.rollNum,
+        examBody: course_details.examBody,
+        courseState:applicant_details.state,
 
       }
-      console.log(updateStudent)
-      this.baseService.updateStudent$(updateStudent).pipe(
-        mergeMap((response) => {
-          console.log("first", response)
-          var claimBody = {
-            entityId: response.id,
-            entityName: course_details.courseName,
-            name: applicant_details.applicantName,
-            propertiesOSID: {
-              studentUPVerification: [response.id
+      console.log("body.........",updateStudent)
+     
+      this.baseService.updateStudent$(updateStudent)
+      // .pipe(
+      //   mergeMap((response) => {
+      //     console.log("first", response)
+      //     const claimBody = {
+
+      //       entityId: response.responseData.id,
+      //       entityName: course_details.courseName,
+      //       name: applicant_details.applicantName,
+      //       propertiesOSID: {
+      //         studentUPVerification: [response.responseData.id
   
-              ]
-            }
-          }
-          console.log(claimBody)
+      //         ]
+      //       }
+      //     }
+      //     console.log(claimBody)
   
-          return this.baseService.createClaim$(claimBody);
-        })
-      ).subscribe(
+      //     return this.baseService.createClaim$(claimBody);
+      //   })
+      // )
+      .subscribe(
         (response) => {
           console.log("second", response)
   
