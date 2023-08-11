@@ -167,7 +167,7 @@ export class NewRegnCertDetailsComponent {
       }
       console.log("body.........",updateStudent)
      
-      this.baseService.updateStudent$(updateStudent)
+      this.baseService.inviteStudent$(updateStudent)
       // .pipe(
       //   mergeMap((response) => {
       //     console.log("first", response)

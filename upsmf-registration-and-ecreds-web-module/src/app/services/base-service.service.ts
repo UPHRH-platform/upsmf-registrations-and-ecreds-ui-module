@@ -73,7 +73,7 @@ export class BaseServiceService  extends HttpService   {
   
   }
 
-  updateStudent$(body: studentDetails): Observable<any> {
+  inviteStudent$(body: studentDetails): Observable<any> {
     const headers = ({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
