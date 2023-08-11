@@ -80,7 +80,7 @@ export class BaseServiceService  extends HttpService   {
     });
     
     const reqParams: RequestParam= {
-      url :this.configService.urlConFig.URLS.UPDATE,
+      url :this.configService.urlConFig.URLS.INVITE_STUDENT_FROMUP,
       header:headers,
       data:body
       

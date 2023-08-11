@@ -7,6 +7,6 @@
             "UPDATE_TICKET":"/tickets/updateTicketBasic"
         },
         "GET_ALL_USERS": "/user/getAllUsers?orgId=1",
-        "UPDATE": "api/v1/StudentFromUP/invite" 
+        "INVITE_STUDENT_FROMUP": "api/v1/StudentFromUP/invite" 
     }
 }
