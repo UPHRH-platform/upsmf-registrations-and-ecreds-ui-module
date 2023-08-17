@@ -75,7 +75,7 @@ export class NewRegnCertDetailsComponent {
         Validators.required]),
       district: new FormControl('Saharanpur', [
         Validators.required]),
-      state: new FormControl('UP', [
+      state: new FormControl('Bihar', [
         Validators.required]),
       pin: new FormControl('302001', [
         Validators.required, Validators.minLength(6),
@@ -174,8 +174,8 @@ export class NewRegnCertDetailsComponent {
       const passDate = new Date(this.newRegCourseDetailsformGroup.get('passDate')?.value);
       const jMonth = joinDate.getMonth();
       const pMonth = passDate.getMonth();
-      const joinYear = joinDate.getFullYear();
-      const passYear = joinDate.getFullYear();
+      const joinYear = joinDate.getFullYear().toString();
+      const passYear = joinDate.getFullYear().toString();
   
       const joinMonth = this.months[jMonth];
       const passMonth = this.months[pMonth];
@@ -201,12 +201,19 @@ export class NewRegnCertDetailsComponent {
         "passingYear": passYear,
         "courseName": value.courseName,
         "phoneNumber": this.newRegCertDetailsformGroup.value.mobNumber,
-        "registrationType": this.stateData.claimType,
-        "council": this.stateData.councilName,
+        "registrationType": this.stateData.body.claimType,
+        "council": this.stateData.body.councilName,
         "mothersName": this.newRegCertDetailsformGroup.value.motherName,
         "name": this.newRegCertDetailsformGroup.value.applicantName,
-        "docproof": "qwer.doc"
+        "docproof": "qwer.doc",
+        "address":`${this.newRegCertDetailsformGroup.value.al1} ${this.newRegCertDetailsformGroup.value.al2}`,
+        "state":this.newRegCertDetailsformGroup.value.state,
+        "district":this.newRegCertDetailsformGroup.value.district,
+        "country" :this.newRegCertDetailsformGroup.value.country,
+        "pincode":this.newRegCertDetailsformGroup.value.pin,
       }
+      console.log("body",updateStudentBody)
+      console.log("stateData",this.stateData)
 
       this.baseService.updateStudent$(this.osid, updateStudentBody)
        .pipe(
@@ -215,9 +222,9 @@ export class NewRegnCertDetailsComponent {
           {
             entityName: "StudentFromUP",
             entityId: this.osid,
-            name: "studentUPVerification",
+            name: "studentVerification",
             propertiesOSID: {
-                studentUPVerification: [
+                studentFromUP: [
                   this.osid
                 ]
             }
