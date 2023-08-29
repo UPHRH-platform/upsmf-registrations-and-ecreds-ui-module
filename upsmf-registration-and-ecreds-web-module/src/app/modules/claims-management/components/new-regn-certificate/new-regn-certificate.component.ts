@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators } 
 import { Observable } from 'rxjs';
 import { BaseServiceService } from 'src/app/services/base-service.service';
 import { BreadcrumbItem } from 'src/app/modules/shared/interfaces';
+import { ConfigService } from 'src/app/modules/shared';
 
 
 @Component({
@@ -54,12 +55,13 @@ export class NewRegnCertificateComponent {
     { label: 'Claim Registration Certificate', url: '/claims/new' },
     { label: 'Claim Details', url: '/claims/new-regn-cert' }
   ];
-
+  courseUrl:string = ''
 
 
   @Input() newRegCertformGroup: FormGroup;
   constructor(private formBuilder: FormBuilder,
-    private router: Router, private baseService: BaseServiceService) { }
+    private router: Router, private baseService: BaseServiceService,
+    private configService: ConfigService,) { }
 
   ngOnInit() {
     this.createForm();
@@ -67,7 +69,8 @@ export class NewRegnCertificateComponent {
   }
 
   getCourses(){
-    this.baseService.getCourses('DIPLOMA').subscribe((data)=>{
+    this.courseUrl = this.configService.urlConFig.URLS.STUDENT.GET_COURSES + 'DIPLOMA'
+    this.baseService.getCourses(this.courseUrl).subscribe((data)=>{
       console.log('data',data.responseData['result'])
       this.qualificationsTypesArray = data?.responseData['result']
     })
