@@ -368,7 +368,7 @@ export class NewRegnCertDetailsComponent {
         "nurseRegNo": value.otherRegnNo ? value.otherRegnNo : "NA",
         "nurseRegDate": value.date? value.date : "NA",
         "claimType":"registration",
-        "certificateNo": "NA"
+        "certificateNumber": "NA"
       }
      console.log('updateStudentBody',updateStudentBody)
    
