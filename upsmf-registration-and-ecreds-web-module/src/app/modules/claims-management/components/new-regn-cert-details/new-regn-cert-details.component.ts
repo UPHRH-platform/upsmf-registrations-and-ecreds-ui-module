@@ -549,10 +549,20 @@ export class NewRegnCertDetailsComponent {
         console.log("res",result);
         if(result){
           this.urlList  = this.updatedUrlList ? this.updatedUrlList : [...this.docsUrl, ...this.urlData]
+          if(this.urlData.length){
+            this.listOfFiles = this.urlData?.map(url => {
+                      const parts = url.split('=');
+            if (parts.length === 2) {
+                return decodeURIComponent(parts[1]);
+            } 
+            return null;
+            });
+            
+          }
           const details=JSON.parse(this.stateData.propertyData);
           console.log("data................",details)
           //convert to string with commaa separated
-          this.convertUrlList = this.urlList.join(',')
+          this.convertUrlList = this.listOfFiles.join(',')
           const mailBody={
             outsideEntityMailId:result.reason,
             name: this.newRegCertDetailsformGroup.value.applicantName,
@@ -560,7 +570,7 @@ export class NewRegnCertDetailsComponent {
             council: details.council,
             email: this.newRegCertDetailsformGroup.value.email,
             examBody: value.examBody,
-            docProof: this.convertUrlList,
+            docProofs: [this.convertUrlList],
             diplomaNumber: value.diplomaNumber,
             nursingCollage: value.collegeName,
             courseState:"aaaaa",
