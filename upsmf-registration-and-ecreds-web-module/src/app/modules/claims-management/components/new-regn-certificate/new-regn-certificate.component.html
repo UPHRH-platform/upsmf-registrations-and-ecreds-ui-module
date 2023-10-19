@@ -66,7 +66,7 @@
                         <!-- </div> -->
 
                         <!-- <div class="flex flex-row  ml4 mt2"> -->
-                            <div class="applicant-details" *ngIf = "this.newRegCertformGroup.controls['origin'].value === 'StudentFromUP'">
+                            <div class="applicant-details" *ngIf = "this.newRegCertformGroup.controls['origin'].value === 'StudentFromUP' || this.newRegCertformGroup.controls['origin'].value === 'StudentOutsideUP'">
                                 <h4 >Select type of course</h4>
                                 <mat-form-field appearance="outline">
                                     <mat-label>Select type of course </mat-label>
@@ -79,7 +79,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <div class="from-up" *ngIf = "this.newRegCertformGroup.controls['courseType'].value === 'Diploma'">
+                            <div class="from-up" *ngIf = "this.newRegCertformGroup.controls['courseType'].value === 'Diploma' && this.newRegCertformGroup.controls['origin'].value === 'StudentFromUP'">
                                 <div class="applicant-details" >
                                     <h4>Date of Birth</h4>
                                     <mat-form-field appearance="outline">

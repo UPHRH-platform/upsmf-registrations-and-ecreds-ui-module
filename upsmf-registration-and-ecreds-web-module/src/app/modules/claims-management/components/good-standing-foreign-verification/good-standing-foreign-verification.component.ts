@@ -94,6 +94,7 @@ export class GoodStandingForeignVerificationComponent {
   applicantUserName:string = ''
 
   profQualificationArray = ['A.N.M', 'Midwife', 'H.W', 'Nurse', 'B.SC.Nursing'];
+  councilList:any[]=[];
 
   breadcrumbItems: BreadcrumbItem[] = [
     { label: 'Claim Registration Certificate', url: '/claims/new' },
@@ -197,7 +198,8 @@ export class GoodStandingForeignVerificationComponent {
               placeOfWork: candidateDetailList.workPlace,
               tcName: candidateDetailList.trainingCenter,
               regnNum: candidateDetailList.registrationNumber,
-              proQual: candidateDetailList.professionalQualification
+              proQual: candidateDetailList.professionalQualification,
+              council: candidateDetailList.council
 
             });
           });
@@ -210,6 +212,7 @@ export class GoodStandingForeignVerificationComponent {
             this.id=this.stateData?.body.id
             this.getRejectReasonStudent()
             this.candidateDetailList = response.responseData
+            this.councilList = ['UPNC','UPMC','UPDC']
             console.log("det", this.candidateDetailList[0])
             this.osid = this.candidateDetailList[0].osid;
             this.urlDataResponse = this.candidateDetailList[0].docproof;
@@ -269,6 +272,8 @@ export class GoodStandingForeignVerificationComponent {
               proQual: this.candidateDetailList[0]?.professionalQualification,
               joinDate: this.candidateDetailList[0].joiningDate,
               passDate: this.candidateDetailList[0].courseDate,
+              council: this.candidateDetailList[0].council
+              
 
             });
 
@@ -329,7 +334,8 @@ export class GoodStandingForeignVerificationComponent {
               placeOfWork: candidateDetailList.workPlace,
               tcName: candidateDetailList.trainingCenter,
               regnNum: candidateDetailList.registrationNumber,
-              proQual: candidateDetailList.professionalQualification
+              proQual: candidateDetailList.professionalQualification,
+              council: candidateDetailList.council
 
             });
           });
@@ -345,6 +351,7 @@ export class GoodStandingForeignVerificationComponent {
             this.id=this.stateData?.body.id
             this.getRejectReasonStudent()
             this.candidateDetailList = response.responseData
+            this.councilList = ['UPNC']
             console.log("det", this.candidateDetailList[0])
             this.osid = this.candidateDetailList[0].osid;
             this.urlDataResponse = this.candidateDetailList[0].docproof;
@@ -407,6 +414,7 @@ export class GoodStandingForeignVerificationComponent {
               proQual: this.candidateDetailList[0]?.professionalQualification,
               joinDate: this.candidateDetailList[0].joiningYear + "-" + jm + "-01",
               passDate: this.candidateDetailList[0].passingYear + "-" + pm + "-01",
+              council: this.candidateDetailList[0].council
               // docproof:this.candidateDetailList[0]?.docproof
 
 
@@ -461,6 +469,7 @@ export class GoodStandingForeignVerificationComponent {
       mobNumber: new FormControl('', [
         Validators.required,
         Validators.pattern("^(0|91)?[6-9][0-9]{9}$")]),
+      council: new FormControl('', [Validators.required]) 
       // fileAttach: new FormControl('')
     });
     if (this.userEmail === "Regulator") {
@@ -801,7 +810,7 @@ export class GoodStandingForeignVerificationComponent {
         "phoneNumber": this.goodStandingForeignVerificationformGroup.value.mobNumber,
         "email": this.goodStandingForeignVerificationformGroup.value.email,
         "trainingCenter": this.goodStandingForeignVerificationformGroup.value.tcName,
-        "council": "UPSMF",
+        "council":this.goodStandingForeignVerificationformGroup.value.council,
         "workPlace": this.goodStandingForeignVerificationformGroup.value.placeOfWork,
         "date": this.datePipe.transform(new Date(), "yyyy-MM-dd")?.toString(),
         "refNo": "REF789012",
@@ -903,7 +912,7 @@ export class GoodStandingForeignVerificationComponent {
           "phoneNumber": this.goodStandingForeignVerificationformGroup.value.mobNumber,
           "email": this.goodStandingForeignVerificationformGroup.value.email,
           "trainingCenter": this.goodStandingForeignVerificationformGroup.value.tcName,
-          "council": "UPSMF",
+          "council": this.goodStandingForeignVerificationformGroup.value.council,
           "workPlace": this.goodStandingForeignVerificationformGroup.value.placeOfWork,
           "date": this.datePipe.transform(new Date(), "yyyy-MM-dd")?.toString(),
           "refNo": "REF789012",
@@ -1029,7 +1038,7 @@ export class GoodStandingForeignVerificationComponent {
       this.entityId = this.stateData.body.entityId;
       this.attestationName = this.stateData.body.attestationName;
       this.attestationId = this.stateData.body.attestationId
-      this.baseService.getCredentials$(this.entity, this.entityId, this.attestationName, this.attestationId)
+      this.baseService.getCredentials$(this.entity, this.entityId, this.attestationName, this.attestationId,'StudentGoodstanding')
         .subscribe((response: any) => {
           const fileName = "Certificate.pdf";
           saveAs(response.responseData, fileName);
@@ -1137,9 +1146,11 @@ export class GoodStandingForeignVerificationComponent {
 
       case 'goodStandingCert':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_GOODSTANDING
+        this.councilList = ['UPNC','UPMC','UPDC']
         break;
       case 'ForeignVerifyReq':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_FOREIGNVARIFIVATION
+        this.councilList = ['UPNC']
 
         break;
       case 'Regulator':

@@ -58,6 +58,9 @@ export class NewRegnCertDetailsComponent {
   convertUrlList: string;
   getMakeClaimbody: any;
   isFieldShow: boolean = false;
+  entityData:string = ''
+  courseTypeData:string = ''
+  reqType:any;
 
   breadcrumbItems: BreadcrumbItem[] = [
     { label: 'Claim Registration Certificate', url: '/claims/new' },
@@ -109,11 +112,13 @@ export class NewRegnCertDetailsComponent {
   courseType:string;
   stateData: any;
   selectedLink: string = 'Candidate Details';
-  requestTypesArray = ['Original', 'Correction', 'Name change', 'Duplicate'];
+  requestTypesArray:any[]=[]
   applicantUserName:string ='';
   examsBody:string = '';
   endPointUrls:string = '';
   studentOsId:string;
+  councilType:string;
+
 
  
 
@@ -149,6 +154,8 @@ export class NewRegnCertDetailsComponent {
       try {
         this.data=JSON.parse(this.stateData?.propertyData)
         this.courseType=this.data.courseType
+        this.councilType = this.data.council
+
 
       } catch (error) {
         // Handle JSON parsing error
@@ -188,7 +195,26 @@ export class NewRegnCertDetailsComponent {
     })
   }
 
-  getCourses(courseUrl: string) {
+  getCourses(entityName:string,courseTyp?:string) {
+   let request = {
+    "councilName": this.stateData?.councilName ? this.stateData?.councilName: this.councilType,
+    "entityName":entityName,
+    "courseType": courseTyp
+   }
+   this.baseService.fetchCourse(request).subscribe({
+    next:(res)=>{ 
+     this.courseList = res?.responseData
+     console.log('courseList',this.courseList)
+    
+    },
+    error:(err)=>{
+      console.log(err)
+    }
+   })
+
+  }
+
+  getCoursesDiploma(courseUrl: string) {
     this.baseService.getCourses(courseUrl).subscribe((data) => {
       this.courseList = data.responseData['result']
     })
@@ -200,12 +226,22 @@ export class NewRegnCertDetailsComponent {
       case 'StudentOutsideUP':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_OUTSIDE_UP
         this.courseUrl = this.configService.urlConFig.URLS.STUDENT.GET_COURSES_OUTSIDE
-        this.getCourses(this.courseUrl)
+        this.entityData = this.stateData?.origin ? this.stateData?.origin : this.stateData?.entity
+        this.courseType = this.stateData.courseType ? this.stateData.courseType : this.courseType
+        this.getCourses(this.entityData,this.courseType)
         break;
       case 'StudentFromUP':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS
         this.courseUrl = this.courseType ==="Diploma" ? this.configService.urlConFig.URLS.STUDENT.GET_COURSES + 'DIPLOMA' :this.configService.urlConFig.URLS.STUDENT.GET_COURSES + 'DEGREE'
-        this.getCourses(this.courseUrl)
+        this.entityData = this.stateData?.origin ? this.stateData?.origin : this.stateData?.entity
+        this.courseType = this.stateData.courseType ? this.stateData.courseType : this.courseType
+        if(this.courseType ==="Diploma"){
+          this.getCoursesDiploma(this.courseUrl)
+        }
+        else {
+          this.getCourses(this.entityData,this.courseType)
+        }
+       
         break;
       case 'Regulator':
         // this.router.navigate(['claims/new-regn-cert'])
@@ -218,6 +254,7 @@ export class NewRegnCertDetailsComponent {
   }
 
   requestTypeSelected(e: any) {
+    this.getActivityList(e.value, this.entityData, this.courseType)
     console.log(e)
     if(e.value == 'M.B.B.S. Name Change'){
       console.log('matched')
@@ -236,6 +273,24 @@ export class NewRegnCertDetailsComponent {
       this.newRegCourseDetailsformGroup.get('marriedName')?.reset()
       this.newRegCourseDetailsformGroup.get('qualificationName')?.reset();
     }
+  }
+
+  getActivityList(e:string,name:string, courseTyp?:string){
+    let request = {
+      "councilName": this.stateData.councilName ? this.stateData.councilName : this.councilType,
+      "entityName": name,
+      "courseType": courseTyp,
+      "courseName": e
+    }
+   this.baseService.fetchActivity(request).subscribe({
+    next: (res)=>{
+      console.log(res)
+      this.requestTypesArray = res.responseData
+    },
+    error:(err)=>{
+      console.log(err)
+    }
+   })
   }
 
   stateTypeSelected(e: Event) {
@@ -536,6 +591,7 @@ export class NewRegnCertDetailsComponent {
               this.candidateDetailList = response.responseData
               console.log("data",this.candidateDetailList[0])
               this.osid = this.candidateDetailList[0].osid;
+              this.reqType =this.candidateDetailList[0].requestType
               this.urlDataResponse = this.candidateDetailList[0].docproof;
               this.filePreview= this.candidateDetailList[0].candidatePic;
               this.fileSignPreview =  this.candidateDetailList[0].candidateSignature;
@@ -578,7 +634,7 @@ export class NewRegnCertDetailsComponent {
                   });
                 }
               }
-
+             this.getActivityList(this.candidateDetailList[0]?.courseName, this.entityData,this.courseType)
 
 
               // this.listOfFiles = this.candidateDetailList[0].docproof;
@@ -628,7 +684,7 @@ export class NewRegnCertDetailsComponent {
                 requestType: this.candidateDetailList[0]?.requestType,
                 university:this.candidateDetailList[0]?.university,
                 marriedName: this.candidateDetailList[0]?.marriedName,
-                qualificationName: this.candidateDetailList[0]?.qualification
+                qualificationName: this.candidateDetailList[0]?.qualification,
               });
              
 
@@ -1094,7 +1150,7 @@ export class NewRegnCertDetailsComponent {
       this.entityId=this.stateData.entityId;
       this.attestationName=this.stateData.attestationName;
       this.attestationId=this.stateData.attestationId
-      this.baseService.getCredentials$(this.entity,this.entityId,this.attestationName,this.attestationId)
+      this.baseService.getCredentialsStudent$(this.entity,this.entityId,this.attestationName,this.attestationId, this.reqType)
       .subscribe((response: any)=>{
         const fileName = "Certificate.pdf";
         saveAs(response.responseData, fileName);
@@ -1132,6 +1188,7 @@ export class NewRegnCertDetailsComponent {
     };
     this.http.getPaymentUrl(postData).subscribe((data) => {
       if (data) {
+        console.log(data)
         window.open(data?.redirectUrl, '_blank')
 
       }

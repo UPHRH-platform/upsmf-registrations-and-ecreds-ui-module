@@ -207,6 +207,19 @@
                                                 *ngIf="goodStandingForeignVerificationformGroup.controls['tcName'].invalid">
                                             </mat-error>
                                         </mat-form-field>
+
+                                        <h4>{{'Council'}}</h4>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Select Council</mat-label>
+                                            <mat-select  formControlName="council">
+                                                <span *ngFor='let council of councilList;let i = index'>
+                                                    <mat-option [value]="council">{{council}}</mat-option>
+                                                </span>
+                                              </mat-select> 
+                                            <mat-error
+                                                *ngIf="goodStandingForeignVerificationformGroup.controls['council'].invalid">
+                                            </mat-error>
+                                        </mat-form-field>
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
                                         <h4>{{labels.regnNum}}</h4>

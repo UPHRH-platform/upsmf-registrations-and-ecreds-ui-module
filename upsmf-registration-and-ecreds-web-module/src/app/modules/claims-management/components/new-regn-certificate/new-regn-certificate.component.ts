@@ -56,6 +56,7 @@ export class NewRegnCertificateComponent {
     { label: 'Claim Details', url: '/claims/new-regn-cert' }
   ];
   courseUrl:string = ''
+  originTypeData:string = ''
 
 
 
@@ -106,10 +107,11 @@ export class NewRegnCertificateComponent {
         Validators.required]),
     });
     (this.origin.valueChanges).subscribe(value => {
-      value === 'StudentFromUP' ? this.courseType.enable() : this.courseType.disable()
+      this.originTypeData = value
+      value === 'StudentFromUP'|| 'StudentOutsideUP'  ? this.courseType.enable() : this.courseType.disable()
     });
     this.courseType.valueChanges.subscribe(value => {
-      if (value === "Diploma") {
+      if (value === "Diploma" && this.originTypeData === 'StudentFromUP') {
         this.dob?.enable();
         this.regNo?.enable();
         this.dob?.enable();
@@ -175,8 +177,11 @@ export class NewRegnCertificateComponent {
   onNewRegnCertformSubmit(value: any) {
     console.log(value)
     this.submitted = true;
-    if (this.newRegCertformGroup.valid && (value.courseType==='degree' || value.origin==='StudentOutsideUP')) {
+    if (this.newRegCertformGroup.valid && (value.courseType==='degree')) {
       this.router.navigate(['claims/new-regn-cert-details'], { state: { body: value } });
+    }
+    else if(this.newRegCertformGroup.valid && (value.courseType==='Diploma' && value.origin==='StudentOutsideUP')){
+      this.router.navigate(['claims/new-regn-cert-details'], { state: { body: value } })
     }
     else{
       this.router.navigate(['claims/regn-diploma-cert-details'], { state: { body: value } });

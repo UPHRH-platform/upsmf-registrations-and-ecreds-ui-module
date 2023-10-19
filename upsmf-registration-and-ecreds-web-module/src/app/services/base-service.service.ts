@@ -226,13 +226,25 @@ export class BaseServiceService extends HttpService {
     return this.get(reqParam);
 
   }
-  getCredentials$(entity:string,entityId:string,attestationName:string,attestationId:string){
+  getCredentials$(entity:string,entityId:string,attestationName:string,attestationId:string,reqType?:string){
     const headers  = {
       'Accept': 'application/pdf',
       'Authorization': `Bearer ${localStorage.getItem("token")}` };
     // this.headers.Accept = 'application/pdf'
     const reqParam: RequestParam = {
-      url: this.configService.urlConFig.URLS.STUDENT.DOWNLOAD_CREDENTIALS + entity + "/" + entityId + "/attestation" + "/" + attestationName + "/" + attestationId,
+      url: this.configService.urlConFig.URLS.STUDENT.DOWNLOAD_CREDENTIALS_v3 + entity + "/" + entityId + "/attestation" + "/" + attestationName + "/" + attestationId + "/" + entity,
+      header: headers
+    }
+    return this.get(reqParam, true); // pass true as second param for pdf download
+
+  }
+  getCredentialsStudent$(entity:string,entityId:string,attestationName:string,attestationId:string, reqType:string){
+    const headers  = {
+      'Accept': 'application/pdf',
+      'Authorization': `Bearer ${localStorage.getItem("token")}` };
+    // this.headers.Accept = 'application/pdf'
+    const reqParam: RequestParam = {
+      url: this.configService.urlConFig.URLS.STUDENT.DOWNLOAD_CREDENTIALS_v3 + entity + "/" + entityId + "/attestation" + "/" + attestationName + "/" + attestationId + "/" + reqType,
       header: headers
     }
     return this.get(reqParam, true); // pass true as second param for pdf download
@@ -305,6 +317,24 @@ export class BaseServiceService extends HttpService {
     }
     return this.get(reqParam);
 
+  }
+
+  fetchCourse(body:any){
+    const reqParam: RequestParam = {
+      url: this.configService.urlConFig.URLS.STUDENT.FETCH_COURSE,
+      data: body,
+      header: this.getHeaders()
+    }
+    return this.postCourse(reqParam);
+  }
+
+  fetchActivity(body:any){
+    const reqParam: RequestParam = {
+      url: this.configService.urlConFig.URLS.STUDENT.FETCH_ACTIVITY,
+      data: body,
+      header: this.getHeaders()
+    }
+    return this.postCourse(reqParam);
   }
 
 

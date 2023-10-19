@@ -354,34 +354,38 @@
                                 (ngSubmit)="onNewRegCourseDetailsformSubmit(newRegCourseDetailsformGroup.value)">
                                 <div class="full-details">
 
-                                    <div class="applicant-details slc">
-                                        <h4>{{labels.requestType}}</h4>
-                                        <mat-form-field appearance="outline">
-                                            <mat-label>Request Type</mat-label>
-                                            <mat-select (selectionChange)="requestTypeSelected($event)"
-                                                formControlName="requestType">
-                                                <span *ngFor='let requesttype of requestTypesArray;let i = index'>
-                                                    <mat-option [value]="requesttype">{{requesttype}}</mat-option>
-                                                </span>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
+                                   
 
                                     <div class="applicant-details">
                                         <h4>{{labels.courseName}}</h4>
                                         <mat-form-field appearance="outline">
                                             <mat-label>Course Name</mat-label>
-                                            <mat-select (selectionChange)="requestTypeSelected($event)"
+                                            <!-- <mat-select (selectionChange)="requestTypeSelected($event)"
                                                 formControlName="courseName">
                                                 <span *ngFor='let course of courseList;let i = index'>
                                                     <mat-option [value]="course">{{course}}</mat-option>
                                                 </span>
-                                            </mat-select>
+                                            </mat-select> -->
+                                            <input matInput  formControlName="courseName" required>
                                         </mat-form-field>
                                         <!-- <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Course Name" formControlName="courseName">
                                             
                                             </mat-form-field> -->
+                                    </div>
+
+                                    <div class="applicant-details slc">
+                                        <h4>{{labels.requestType}}</h4>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Request Type</mat-label>
+                                            <!-- <mat-select (selectionChange)="requestTypeSelected($event)"
+                                                formControlName="requestType">
+                                                <span *ngFor='let requesttype of requestTypesArray;let i = index'>
+                                                    <mat-option [value]="requesttype">{{requesttype}}</mat-option>
+                                                </span>
+                                            </mat-select> -->
+                                            <input matInput  formControlName="requestType" required>
+                                        </mat-form-field>
                                     </div>
 
                                     <div class="applicant-details" *ngIf="isFieldShow">
