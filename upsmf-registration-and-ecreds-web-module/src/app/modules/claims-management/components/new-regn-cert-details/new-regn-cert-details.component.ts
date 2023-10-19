@@ -634,7 +634,10 @@ export class NewRegnCertDetailsComponent {
                   });
                 }
               }
-             this.getActivityList(this.candidateDetailList[0]?.courseName, this.entityData,this.courseType)
+              if(this.candidateDetailList[0]?.courseName){
+                this.getActivityList(this.candidateDetailList[0]?.courseName, this.entityData,this.courseType)
+              }
+             
 
 
               // this.listOfFiles = this.candidateDetailList[0].docproof;
