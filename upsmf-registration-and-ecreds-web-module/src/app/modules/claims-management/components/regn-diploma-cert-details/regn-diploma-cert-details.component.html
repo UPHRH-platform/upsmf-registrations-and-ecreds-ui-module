@@ -309,6 +309,26 @@
                                 (ngSubmit)="onNewRegCourseDetailsformSubmit(newRegCourseDetailsformGroup.value)">
                                     <div class="full-details">
 
+                                        <div class="applicant-details">
+                                            <h4>{{labels.courseName}}</h4>
+                                            <mat-form-field appearance ="outline">
+                                                <mat-label>Course Name</mat-label>
+                                              <!-- <mat-select (selectionChange)="requestTypeSelected($event)" formControlName="courseName">
+                                                <span *ngFor='let courseName of courseList;let i = index'>
+                                                    <mat-option [value]="courseName">{{courseName}}</mat-option>
+                                                </span>
+                                              </mat-select> -->
+        
+                                                <input matInput placeholder="course name" readonly formControlName="courseName">
+                                            
+                                            
+                                        </mat-form-field>
+                                            <!-- <mat-form-field appearance="outline">
+                                                <input matInput placeholder="Course Name" formControlName="courseName">
+                                            
+                                            </mat-form-field> -->
+                                        </div>
+
                                         <div class="applicant-details slc">
                                             <h4>{{labels.requestType}}</h4>
                                             <mat-form-field appearance ="outline">
@@ -321,21 +341,7 @@
                                         </mat-form-field>
                                         </div>
 
-                                        <div class="applicant-details">
-                                            <h4>{{labels.courseName}}</h4>
-                                            <mat-form-field appearance ="outline">
-                                                <mat-label>Course Name</mat-label>
-                                              <mat-select (selectionChange)="requestTypeSelected($event)" formControlName="courseName">
-                                                <span *ngFor='let courseName of courseList;let i = index'>
-                                                    <mat-option [value]="courseName">{{courseName}}</mat-option>
-                                                </span>
-                                              </mat-select>
-                                        </mat-form-field>
-                                            <!-- <mat-form-field appearance="outline">
-                                                <input matInput placeholder="Course Name" formControlName="courseName">
-                                            
-                                            </mat-form-field> -->
-                                        </div>
+                                      
 
                                         <div class="applicant-details">
                                             <h4>{{labels.collegeName}}</h4>

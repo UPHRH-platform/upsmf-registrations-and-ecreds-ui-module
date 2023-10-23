@@ -100,7 +100,7 @@ export class RegnDiplomaCertDetailsComponent {
   userRole: any;
   userEmail: any;
   endPointUrl: any;
-  courseList: any[] = [];
+  courseList: any;
   courseUrl: string = ''
   paymentResponse: any;
   updateStudentBody: any;
@@ -120,7 +120,7 @@ export class RegnDiplomaCertDetailsComponent {
   isFileInputDisabled = true;
 
   selectedLink: string = 'Candidate Details';
-  requestTypesArray = ['Original', 'Correction', 'Name change', 'Duplicate'];
+  requestTypesArray:any[]=[];
   examsBody:any;
 
 
@@ -212,7 +212,7 @@ export class RegnDiplomaCertDetailsComponent {
       case 'StudentFromUP':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS
         this.courseUrl = this.configService.urlConFig.URLS.STUDENT.GET_COURSES + 'DIPLOMA'
-        this.getCourses(this.courseUrl)
+        // this.getCourses(this.courseUrl)
         break;
       case 'Regulator':
         // this.router.navigate(['claims/new-regn-cert'])
@@ -1153,7 +1153,26 @@ export class RegnDiplomaCertDetailsComponent {
   onEditClick(){
     this.newRegCertDetailsformGroup.enable();
     this.newRegCourseDetailsformGroup.enable();
+    // this.newRegCourseDetailsformGroup.get('courseName')?.disable()
     this.isFileInputDisabled = false;
+    this.getActivity()
+  }
+
+  getActivity(){
+    let request = {
+      "councilName": this.stateData.councilName,
+      "entityName": 'StudentFromUP',
+      "courseType": 'Diploma',
+      "courseName": this.candetails.courseName
+    }
+    this.baseService.fetchActivity(request).subscribe({
+      next:(res)=>{
+        this.requestTypesArray = res.responseData
+      },
+      error:(err)=>{
+        console.log(err)
+      }
+    })
   }
   onProfileChanged(event?:any){
     let selectedUploadFile = event.target.files[0];
