@@ -69,6 +69,26 @@ export class HttpService {
       }));
   }
 
+  // get Course and activity
+  postCourse(requestParam: RequestParam): Observable<ServerResponse> {
+    const httpOptions: HttpOptions = {
+      headers: requestParam.header ? this.getHeader(requestParam.header) : this.getHeader(),
+      params: requestParam.param
+    };
+    return this.http.post<ServerResponse>(this.baseUrl + requestParam.url, requestParam.data, httpOptions).pipe(
+      mergeMap((data: ServerResponse) => {
+        console.log(data)
+      /*   if (data.statusInfo.status !== 200) {
+          return throwError(() => new Error(data.statusInfo?.errorMessage));
+        } */
+        const serverRes: ServerResponse ={
+          statusInfo: {status: 200, statusMessage: "success"},
+          responseData: data
+        }
+        return observableOf(serverRes);
+      }));
+  }
+
   /**
    * for making patch api calls
    *

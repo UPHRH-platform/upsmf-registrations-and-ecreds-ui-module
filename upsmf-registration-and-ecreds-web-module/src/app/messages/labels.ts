@@ -33,7 +33,8 @@ export const applabels = {
     placeOfWork:"Place where you worked with full details",
     uploadPhoto: "Upload Photo",
     uploadSignature:"Upload Signature",
-    qualification: "Qualification"
+    qualification: "Qualification",
+    council:"Council"
     
 
 

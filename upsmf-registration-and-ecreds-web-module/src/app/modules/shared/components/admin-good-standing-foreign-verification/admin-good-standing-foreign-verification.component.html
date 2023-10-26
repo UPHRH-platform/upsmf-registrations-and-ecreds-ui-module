@@ -232,6 +232,15 @@
                                                 *ngIf="goodStandingForeignVerificationformGroup.controls['tcName'].invalid">
                                             </mat-error>
                                         </mat-form-field>
+
+                                        <h4>{{labels.council}}</h4>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="Council"
+                                                formControlName="council">
+                                            <mat-error
+                                                *ngIf="goodStandingForeignVerificationformGroup.controls['council'].invalid">
+                                            </mat-error>
+                                        </mat-form-field>
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
                                         <h4>{{labels.regnNum}}</h4>
@@ -315,8 +324,7 @@
 
                                                 <mat-list>
                                                     <mat-list-item (click)="navigateToUrl(selected.url)">{{
-                                                        selected.name }} <mat-icon class="mt2 ml4"
-                                                            (click)="removeSelectedFile(index)">delete</mat-icon></mat-list-item>
+                                                        selected.name }} </mat-list-item>
                                                     <mat-divider></mat-divider>
 
                                                 </mat-list>

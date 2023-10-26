@@ -209,7 +209,8 @@ export class PaymentSuccessFailureComponent implements OnInit {
                 "university":this.candetails.university,
                 "validityUpto":this.candetails.validityUpto,
                 "refNo":this.candetails.refNo ? this.candetails.refNo : '',
-                "regNumber": this.candetails.regNumber ? this.candetails.regNumber : ''
+                "regNumber": this.candetails.regNumber ? this.candetails.regNumber : '',
+                "activityName":this.candetails.activityName ? this.candetails.activityName : ''
               }
               this.baseService.updateDiploma$(this.dipData.osId, updatediplomaBody).subscribe((response) => {
                 console.log(response)

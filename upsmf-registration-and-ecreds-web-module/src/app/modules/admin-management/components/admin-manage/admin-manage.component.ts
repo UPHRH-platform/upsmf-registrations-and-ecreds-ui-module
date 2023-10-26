@@ -11,12 +11,12 @@ export class AdminManageComponent {
 
   }
   cardList: any[] = [
-    {
-      title: 'Form Management',
-      // description:
-      //   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
-      type: 'dashboard',
-    },
+    // {
+    //   title: 'Form Management',
+    //   // description:
+    //   //   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
+    //   type: 'dashboard',
+    // },
 
     {
       title: 'Claim Management',

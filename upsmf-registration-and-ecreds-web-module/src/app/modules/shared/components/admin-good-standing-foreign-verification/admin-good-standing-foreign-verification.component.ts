@@ -197,6 +197,7 @@ export class AdminGoodStandingForeignVerificationComponent {
               proQual: response.responseData.professionalQualification,
               joinDate: response.responseData.joiningDate,
               passDate: response.responseData.courseDate,
+              council: response.responseData.council
             });
           });
     }
@@ -274,6 +275,7 @@ export class AdminGoodStandingForeignVerificationComponent {
               proQual: response.responseData.professionalQualification,
               joinDate: response.responseData.joiningYear + "-" + jm + "-01",
               passDate: response.responseData.passingYear + "-" + pm + "-01",
+              council: response.responseData.council
 
             });
           });
@@ -328,6 +330,7 @@ export class AdminGoodStandingForeignVerificationComponent {
       mobNumber: new FormControl('', [
         Validators.required,
         Validators.pattern("^(0|91)?[6-9][0-9]{9}$")]),
+      council: new FormControl('', [Validators.required])
     });
     this.goodStandingForeignVerificationformGroup.disable();
     { { (this.stateData.body.entity === "StudentForeignVerification" ? this.getCandidatePersonalDetailsForeign() : this.getCandidatePersonalDetails()) } }

@@ -334,17 +334,7 @@
                                 (ngSubmit)="onNewRegCourseDetailsformSubmit(newRegCourseDetailsformGroup.value)">
                                     <div class="full-details">
 
-                                        <div class="applicant-details slc">
-                                            <h4>{{labels.requestType}}</h4>
-                                            <mat-form-field appearance ="outline">
-                                                <mat-label>Request Type</mat-label>
-                                              <mat-select (selectionChange)="requestTypeSelected($event)" formControlName="requestType">
-                                                <span *ngFor='let requesttype of requestTypesArray;let i = index'>
-                                                    <mat-option [value]="requesttype">{{requesttype}}</mat-option>
-                                                </span>
-                                              </mat-select>
-                                        </mat-form-field>
-                                        </div>
+                                        
 
                                         <div class="applicant-details">
                                             <h4>{{labels.courseName}}</h4>
@@ -360,6 +350,17 @@
                                                 <input matInput placeholder="Course Name" formControlName="courseName">
                                             
                                             </mat-form-field> -->
+                                        </div>
+                                        <div class="applicant-details slc">
+                                            <h4>{{labels.requestType}}</h4>
+                                            <mat-form-field appearance ="outline">
+                                                <mat-label>Request Type</mat-label>
+                                              <mat-select  formControlName="requestType">
+                                                <span *ngFor='let requesttype of requestTypesArray;let i = index'>
+                                                    <mat-option [value]="requesttype">{{requesttype}}</mat-option>
+                                                </span>
+                                              </mat-select>
+                                        </mat-form-field>
                                         </div>
 
                                         <div class="applicant-details" *ngIf="isFieldShow">
@@ -510,10 +511,12 @@
                                         
                                             <div class="applicant-details">
                                                 <h4>Date</h4>
+
                                                 <mat-form-field appearance="outline">
                                                     <mat-label>Choose a date</mat-label>
-                                                    <input matInput formControlName="date">
-                                                    <mat-datepicker #pickerpassingDate></mat-datepicker>
+                                                    <input matInput [matDatepicker]="picker" formControlName="date">
+                                                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                                      <mat-datepicker #picker></mat-datepicker>
                                         
                                                 </mat-form-field>
                                             </div>

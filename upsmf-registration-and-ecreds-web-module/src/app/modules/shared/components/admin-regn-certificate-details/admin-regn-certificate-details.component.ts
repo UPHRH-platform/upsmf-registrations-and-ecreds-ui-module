@@ -100,6 +100,7 @@ export class AdminRegnCertificateDetailsComponent {
   data:any;
   courseType:string;
   isFieldShow:boolean = false;
+  isOutsideUp:boolean = false;
 
 
   stateData: any;
@@ -166,6 +167,7 @@ export class AdminRegnCertificateDetailsComponent {
     switch (this.stateData?.origin || this.stateData?.entity) {
 
       case 'StudentOutsideUP':
+        this.isOutsideUp =  true
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_OUTSIDE_UP
         this.courseUrl = this.configService.urlConFig.URLS.STUDENT.GET_COURSES_OUTSIDE
         this.getCourses(this.courseUrl)
@@ -486,7 +488,14 @@ export class AdminRegnCertificateDetailsComponent {
               university: response.responseData.university,
               diplomaNumber: response.responseData.diplomaNumber,
               marriedName: response.responseData?.marriedName,
-              qualificationName: response.responseData?.qualification
+              qualificationName: response.responseData?.qualification,
+              newCouncil: response?.responseData?.courseCouncil,
+              otherRegnNo: response?.responseData?.nurseRegNo,
+              stateName: response?.responseData?.courseState,
+              // date: response?.responseData.nurseRegDate
+
+
+
 
 
             });
