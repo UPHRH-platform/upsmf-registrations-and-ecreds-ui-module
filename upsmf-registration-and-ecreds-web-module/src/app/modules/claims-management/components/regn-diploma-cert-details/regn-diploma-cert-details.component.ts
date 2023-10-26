@@ -120,7 +120,7 @@ export class RegnDiplomaCertDetailsComponent {
   isFileInputDisabled = true;
 
   selectedLink: string = 'Candidate Details';
-  requestTypesArray:any[]=[];
+  requestTypesArray:any[]=['Issue','Duplicate', 'Corrected','Reissue'];
   examsBody:any;
 
 
@@ -451,9 +451,11 @@ export class RegnDiplomaCertDetailsComponent {
             joinDate: this.candetails.joiningYear + "-" + jm + "-01",
             rollNum: this.candetails.finalYearRollNo,
             passDate: this.candetails.passingYear + "-" + pm + "-01",
-            requestType: this.candetails.requestType,
+            // requestType: this.candetails.requestType,
             university: this.candetails.university,
-            diplomaNumber: this.candetails.finalYearRollNo
+            diplomaNumber: this.candetails.finalYearRollNo,
+            requestType:this.candetails.activityName
+            
 
           });
         }
@@ -546,9 +548,10 @@ export class RegnDiplomaCertDetailsComponent {
             joinDate: this.candetails.joiningYear + "-" + jm + "-01",
             rollNum: this.candetails.finalYearRollNo,
             passDate: this.candetails.passingYear + "-" + pm + "-01",
-            requestType: this.candetails.requestType,
+            // requestType: this.candetails.requestType,
             university: this.candetails.university,
-            diplomaNumber: this.candetails.finalYearRollNo
+            diplomaNumber: this.candetails.finalYearRollNo,
+            requestType:this.candetails.activityName
 
           });
         }

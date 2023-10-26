@@ -27,7 +27,7 @@
             "GET_COURSES_OUTSIDE":"api/v1/allcourse/StudentFromUP",
             "DOWNLOAD_CREDENTIALS":"api/v2/",
             "DOWNLOAD_CREDENTIALS_v3":"api/v3/",
-            "DOWNLOAD_CREDENTIALS_DIPLOMA":"api/v1/DiplomaFromUP/",
+            "DOWNLOAD_CREDENTIALS_DIPLOMA":"api/v3/DiplomaFromUP/",
             "GET_DIPLOMA_DETAILS":"api/v1/DiplomaFromUP/search",
             "DIPLOMA_PAYMENT":"claim-ms/api/v1/Payment",
             "STUDENT_OSID":"api/v1/StudentFromUP/search",

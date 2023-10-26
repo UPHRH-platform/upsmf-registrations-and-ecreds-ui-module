@@ -118,6 +118,7 @@ export class NewRegnCertDetailsComponent {
   endPointUrls:string = '';
   studentOsId:string;
   councilType:string;
+  isOutsideUp:boolean = false;
 
 
  
@@ -224,6 +225,7 @@ export class NewRegnCertDetailsComponent {
     switch (this.stateData?.origin|| this.stateData?.entity) {
 
       case 'StudentOutsideUP':
+        this.isOutsideUp =  true
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_OUTSIDE_UP
         this.courseUrl = this.configService.urlConFig.URLS.STUDENT.GET_COURSES_OUTSIDE
         this.entityData = this.stateData?.origin ? this.stateData?.origin : this.stateData?.entity
@@ -688,6 +690,12 @@ export class NewRegnCertDetailsComponent {
                 university:this.candidateDetailList[0]?.university,
                 marriedName: this.candidateDetailList[0]?.marriedName,
                 qualificationName: this.candidateDetailList[0]?.qualification,
+                stateName: this.candidateDetailList[0]?.courseState,
+                newCouncil: this.candidateDetailList[0]?.courseCouncil,
+                otherRegnNo: this.candidateDetailList[0]?.nurseRegNo,
+                // date: this.candidateDetailList[0]?.nurseRegDate
+
+
               });
              
 
@@ -839,7 +847,7 @@ export class NewRegnCertDetailsComponent {
           "courseState": value.stateName ? value.stateName : "NA",
           "courseCouncil": value.newCouncil ? value.newCouncil : "NA",
           "nurseRegNo": value.otherRegnNo ? value.otherRegnNo : "NA",
-          "nurseRegDate": value.date ? value.date : "NA",
+          "nurseRegDate": value.date ? this.datePipe.transform(value.date, "yyyy-MM-dd")?.toString() : "NA",
           "claimType": "registration",
           "certificateNo": "NA",
           "university": value.university,
