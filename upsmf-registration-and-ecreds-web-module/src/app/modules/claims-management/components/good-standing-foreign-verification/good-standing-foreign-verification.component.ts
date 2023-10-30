@@ -95,6 +95,7 @@ export class GoodStandingForeignVerificationComponent {
 
   profQualificationArray = ['A.N.M', 'Midwife', 'H.W', 'Nurse', 'B.SC.Nursing'];
   councilList:any[]=[];
+  isGoodStanding:boolean = false;
 
   breadcrumbItems: BreadcrumbItem[] = [
     { label: 'Claim Registration Certificate', url: '/claims/new' },
@@ -199,7 +200,8 @@ export class GoodStandingForeignVerificationComponent {
               tcName: candidateDetailList.trainingCenter,
               regnNum: candidateDetailList.registrationNumber,
               proQual: candidateDetailList.professionalQualification,
-              council: candidateDetailList.council
+              council: candidateDetailList.council,
+              registrationIssueDate: candidateDetailList.registrationIssueDate
 
             });
           });
@@ -213,6 +215,10 @@ export class GoodStandingForeignVerificationComponent {
             this.getRejectReasonStudent()
             this.candidateDetailList = response.responseData
             this.councilList = ['UPNC','UPMC','UPDC']
+            this.isGoodStanding = true;
+            this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.clearValidators();
+            this.goodStandingForeignVerificationformGroup.get('councilAddress')?.clearValidators();
+           this.goodStandingForeignVerificationformGroup.get('councilCountry')?.clearValidators();
             console.log("det", this.candidateDetailList[0])
             this.osid = this.candidateDetailList[0].osid;
             this.urlDataResponse = this.candidateDetailList[0].docproof;
@@ -272,7 +278,8 @@ export class GoodStandingForeignVerificationComponent {
               proQual: this.candidateDetailList[0]?.professionalQualification,
               joinDate: this.candidateDetailList[0].joiningDate,
               passDate: this.candidateDetailList[0].courseDate,
-              council: this.candidateDetailList[0].council
+              council: this.candidateDetailList[0].council,
+              registrationIssueDate: this.candidateDetailList[0].registrationIssueDate
               
 
             });
@@ -335,7 +342,13 @@ export class GoodStandingForeignVerificationComponent {
               tcName: candidateDetailList.trainingCenter,
               regnNum: candidateDetailList.registrationNumber,
               proQual: candidateDetailList.professionalQualification,
-              council: candidateDetailList.council
+              council: candidateDetailList.council,
+              registrationIssueDate: candidateDetailList.registrationIssueDate,
+              foreignCouncilName: candidateDetailList.foreignCouncilName,
+              councilAddress: candidateDetailList.foreignCouncilAddress,
+              councilCountry:candidateDetailList.foreignCouncilCountry
+
+
 
             });
           });
@@ -344,14 +357,18 @@ export class GoodStandingForeignVerificationComponent {
 
 
     else {
-
+     
       this.baseService.getCandidatePersonalDetailsForeignVerification$()
         .subscribe(
           (response: any) => {
             this.id=this.stateData?.body.id
+
             this.getRejectReasonStudent()
             this.candidateDetailList = response.responseData
             this.councilList = ['UPNC']
+            this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.setValidators(Validators.required)
+            this.goodStandingForeignVerificationformGroup.get('councilAddress')?.setValidators(Validators.required)
+            this.goodStandingForeignVerificationformGroup.get('councilCountry')?.setValidators(Validators.required)
             console.log("det", this.candidateDetailList[0])
             this.osid = this.candidateDetailList[0].osid;
             this.urlDataResponse = this.candidateDetailList[0].docproof;
@@ -414,7 +431,11 @@ export class GoodStandingForeignVerificationComponent {
               proQual: this.candidateDetailList[0]?.professionalQualification,
               joinDate: this.candidateDetailList[0].joiningYear + "-" + jm + "-01",
               passDate: this.candidateDetailList[0].passingYear + "-" + pm + "-01",
-              council: this.candidateDetailList[0].council
+              council: this.candidateDetailList[0].council,
+              registrationIssueDate: this.candidateDetailList[0].registrationIssueDate,
+              foreignCouncilName: this.candidateDetailList[0].foreignCouncilName,
+              councilAddress: this.candidateDetailList[0].foreignCouncilAddress,
+              councilCountry:this.candidateDetailList[0].foreignCouncilCountry
               // docproof:this.candidateDetailList[0]?.docproof
 
 
@@ -469,7 +490,12 @@ export class GoodStandingForeignVerificationComponent {
       mobNumber: new FormControl('', [
         Validators.required,
         Validators.pattern("^(0|91)?[6-9][0-9]{9}$")]),
-      council: new FormControl('', [Validators.required]) 
+      council: new FormControl('', [Validators.required]),
+      foreignCouncilName: new FormControl(''),
+      councilAddress: new FormControl(''),
+      councilCountry: new FormControl(''),
+      registrationIssueDate: new FormControl('',[Validators.required])
+
       // fileAttach: new FormControl('')
     });
     if (this.userEmail === "Regulator") {
@@ -835,6 +861,7 @@ export class GoodStandingForeignVerificationComponent {
         // "passingYear": passYear.toString(),
         "joiningDate":this.datePipe.transform(this.goodStandingForeignVerificationformGroup.get('joinDate')?.value, "yyyy-MM-dd")?.toString(),
         "courseDate" : this.datePipe.transform(this.goodStandingForeignVerificationformGroup.get('passDate')?.value,"yyyy-MM-dd")?.toString(),
+        "registrationIssueDate":this.datePipe.transform(this.goodStandingForeignVerificationformGroup.value.registrationIssueDate,"yyyy-MM-dd")?.toString()
         // "university":'NA'
 
 
@@ -935,7 +962,11 @@ export class GoodStandingForeignVerificationComponent {
           "passingMonth": passMonth,
           "joiningYear": joinYear.toString(),
           "passingYear": passYear.toString(),
-          "university":'NA'
+          "university":'NA',
+          "registrationIssueDate":this.datePipe.transform(this.goodStandingForeignVerificationformGroup.value.registrationIssueDate,"yyyy-MM-dd")?.toString(),
+          "foreignCouncilName": this.goodStandingForeignVerificationformGroup.value.foreignCouncilName,
+          "foreignCouncilAddress": this.goodStandingForeignVerificationformGroup.value.councilAddress,
+          "foreignCouncilCountry": this.goodStandingForeignVerificationformGroup.value.councilCountry
 
         }
         console.log("foreign body", updateStudentForeignVerificationBody)
@@ -1147,11 +1178,18 @@ export class GoodStandingForeignVerificationComponent {
       case 'goodStandingCert':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_GOODSTANDING
         this.councilList = ['UPNC','UPMC','UPDC']
+        this.isGoodStanding =  true
+        this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.clearValidators();
+        this.goodStandingForeignVerificationformGroup.get('councilAddress')?.clearValidators();
+        this.goodStandingForeignVerificationformGroup.get('councilCountry')?.clearValidators();
+
         break;
       case 'ForeignVerifyReq':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_FOREIGNVARIFIVATION
         this.councilList = ['UPNC']
-
+        this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.setValidators(Validators.required)
+        this.goodStandingForeignVerificationformGroup.get('councilAddress')?.setValidators(Validators.required)
+        this.goodStandingForeignVerificationformGroup.get('councilCountry')?.setValidators(Validators.required)
         break;
       case 'Regulator':
         // this.router.navigate(['claims/new-regn-cert'])

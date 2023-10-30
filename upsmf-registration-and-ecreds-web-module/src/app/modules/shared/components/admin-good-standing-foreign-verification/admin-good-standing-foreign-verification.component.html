@@ -241,6 +241,42 @@
                                                 *ngIf="goodStandingForeignVerificationformGroup.controls['council'].invalid">
                                             </mat-error>
                                         </mat-form-field>
+                                        <span *ngIf="!isGoodStanding">
+                                            <h4>{{labels.ForeignCouncilName}}</h4>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput placeholder="foreign Council Name" formControlName="foreignCouncilName">
+                                                <mat-error
+                                                    *ngIf="goodStandingForeignVerificationformGroup.controls['foreignCouncilName'].invalid">
+                                                </mat-error>
+                                            </mat-form-field>
+    
+                                            <h4>{{labels.ForeignCouncilAddress}}</h4>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput placeholder="foreign Council Address" formControlName="councilAddress">
+                                                <mat-error
+                                                    *ngIf="goodStandingForeignVerificationformGroup.controls['councilAddress'].invalid">
+                                                </mat-error>
+                                            </mat-form-field>
+    
+                                            <h4>{{labels.ForeignCouncilCountry}}</h4>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput placeholder="foreign Council Address" formControlName="councilCountry">
+                                                <mat-error
+                                                    *ngIf="goodStandingForeignVerificationformGroup.controls['councilCountry'].invalid">
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </span>
+    
+                                            <h4>{{labels.registrationIssueDate}}</h4>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Choose a date</mat-label>
+                                                <input matInput [matDatepicker]="picker1"  formControlName="registrationIssueDate" >
+                                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker1></mat-datepicker>
+                                            </mat-form-field>
+
+
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
                                         <h4>{{labels.regnNum}}</h4>

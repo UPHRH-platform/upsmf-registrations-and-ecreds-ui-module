@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="full-details">
                                     <div class="applicant-details" *ngIf="!this.candidateDetailList[0]?.paymentStatus">
-                                        <h4>{{labels.maidenName}}</h4>
+                                        <h4>{{labels.maidenName}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
                                             <input matInput placeholder="Maiden Name" formControlName="maidenName">
                                             <mat-error
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="pr-details" *ngIf="this.candidateDetailList[0]?.paymentStatus">
                                         <div class="person-details">
-                                                <h4>{{labels.maidenName}}</h4>
+                                                <h4>{{labels.maidenName}}<i style="color: red;">*</i></h4>
                                                 <mat-form-field appearance="outline">
                                                     <input matInput placeholder="Maiden Name" formControlName="maidenName">
                                                     <mat-error
@@ -63,7 +63,7 @@
                                     <div class="applicant-details">
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
-                                        <h4>{{labels.mrdName}}</h4>
+                                        <h4>{{labels.mrdName}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
                                             <input matInput placeholder="Married Name" formControlName="mrdName">
                                             <mat-error
@@ -72,7 +72,7 @@
                                         </mat-form-field>
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
-                                        <h4>{{labels.fatherName}}</h4>
+                                        <h4>{{labels.fatherName}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
                                             <input matInput placeholder="Father's Name" formControlName="fatherName">
                                             <mat-error
@@ -81,7 +81,7 @@
                                         </mat-form-field>
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
-                                        <h4>{{labels.dob}} </h4>
+                                        <h4>{{labels.dob}}<i style="color: red;">*</i> </h4>
                                         <mat-form-field appearance="outline">
                                             <mat-label>Choose a date</mat-label>
                                             <input matInput [matDatepicker]="picker" formControlName="dob">
@@ -95,7 +95,7 @@
                                     <div class="place-details">
                                         <div class="address-details">
                                             <!-- <div class=" mt3 "> -->
-                                            <h4>{{labels.al1}}</h4>
+                                            <h4>{{labels.al1}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Address Line 1" formControlName="al1">
                                                 <mat-error
@@ -117,7 +117,7 @@
                                     <div class="place-details">
                                         <div class="address-details">
                                             <!-- <div> -->
-                                            <h4>{{labels.district}}</h4>
+                                            <h4>{{labels.district}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="District" formControlName="district">
                                                 <mat-error
@@ -128,7 +128,7 @@
                                         </div>
                                         <div class="address-details">
                                             <!-- <div> -->
-                                            <h4>{{labels.state}} </h4>
+                                            <h4>{{labels.state}}<i style="color: red;">*</i> </h4>
                                             <mat-form-field appearance="outline">
                                                 <mat-select (selectionChange)="stateTypeSelected($event)" formControlName="state">
                                                     <span *ngFor='let state of stateList;let i = index'>
@@ -144,7 +144,7 @@
                                     <div class="place-details">
                                         <div class="address-details">
                                             <!-- <div> -->
-                                            <h4>{{labels.pin}} </h4>
+                                            <h4>{{labels.pin}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Pincode" formControlName="pin">
                                                 <mat-error
@@ -155,7 +155,7 @@
                                         </div>
                                         <div class="address-details">
                                             <!-- <div> -->
-                                            <h4>{{labels.country}} </h4>
+                                            <h4>{{labels.country}}<i style="color: red;">*</i> </h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Country" formControlName="country">
                                                 <mat-error
@@ -166,7 +166,7 @@
                                         </div>
                                     </div>
                                     <div class="applicant-details">
-                                        <h4>{{labels.mobNumber}}</h4>
+                                        <h4>{{labels.mobNumber}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
                                             <input matInput placeholder="Mobile Number" formControlName="mobNumber">
                                             <mat-error
@@ -176,7 +176,7 @@
                                         <!-- </div> -->
                                         <!-- <div class="applicant-details"> -->
                                         <div>
-                                            <h4>{{labels.email}}</h4>
+                                            <h4>{{labels.email}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Email ID" formControlName="email">
                                                 <mat-error
@@ -187,7 +187,7 @@
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
                                         <!-- <div class=" mt3 "> -->
-                                        <h4>{{labels.proQual}}</h4>
+                                        <h4>{{labels.proQual}}<i style="color: red;">*</i></h4>
                                         <mat-radio-group color="primary" formControlName="proQual">
                                             <span *ngFor='let qual of profQualificationArray;let i = index'>
                                                 <mat-radio-button [value]="qual">{{qual}}</mat-radio-button>
@@ -199,7 +199,7 @@
                                         <!-- </div> -->
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column mt3"> -->
-                                        <h4>{{labels.tcName}}</h4>
+                                        <h4>{{labels.tcName}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
                                             <input matInput placeholder=" Name of Training Centre"
                                                 formControlName="tcName">
@@ -208,7 +208,7 @@
                                             </mat-error>
                                         </mat-form-field>
 
-                                        <h4>{{'Council'}}</h4>
+                                        <h4>{{'Council'}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
                                             <mat-label>Select Council</mat-label>
                                             <mat-select  formControlName="council">
@@ -220,16 +220,50 @@
                                                 *ngIf="goodStandingForeignVerificationformGroup.controls['council'].invalid">
                                             </mat-error>
                                         </mat-form-field>
+                                        <span *ngIf="!isGoodStanding">
+                                        <h4>{{labels.ForeignCouncilName}}<i style="color: red;">*</i></h4>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="foreign Council Name" formControlName="foreignCouncilName">
+                                            <mat-error
+                                                *ngIf="goodStandingForeignVerificationformGroup.controls['foreignCouncilName'].invalid">
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <h4>{{labels.ForeignCouncilAddress}}<i style="color: red;">*</i></h4>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="foreign Council Address" formControlName="councilAddress">
+                                            <mat-error
+                                                *ngIf="goodStandingForeignVerificationformGroup.controls['councilAddress'].invalid">
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <h4>{{labels.ForeignCouncilCountry}}<i style="color: red;">*</i></h4>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="foreign Council Address" formControlName="councilCountry">
+                                            <mat-error
+                                                *ngIf="goodStandingForeignVerificationformGroup.controls['councilCountry'].invalid">
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </span>
+
+                                        <h4>{{labels.registrationIssueDate}}<i style="color: red;">*</i></h4>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Choose a date</mat-label>
+                                            <input matInput [matDatepicker]="picker1"  formControlName="registrationIssueDate" >
+                                            <mat-hint>MM/DD/YYYY</mat-hint>
+                                            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                        </mat-form-field>
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
-                                        <h4>{{labels.regnNum}}</h4>
+                                        <h4>{{labels.regnNum}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
                                             <input matInput placeholder="Registration Number" formControlName="regnNum">
                                             <mat-error
                                                 *ngIf="goodStandingForeignVerificationformGroup.controls['regnNum'].invalid">
                                             </mat-error>
                                         </mat-form-field>
-                                        <h4>{{labels.joinDate}}</h4>
+                                        <h4>{{labels.joinDate}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
 
                                             <mat-label>Choose a date</mat-label>
@@ -239,7 +273,7 @@
                                         </mat-form-field>
 
 
-                                        <h4>{{labels.passDate}}</h4>
+                                        <h4>{{labels.passDate}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
                                             <mat-label>Choose a date</mat-label>
                                             <input matInput [matDatepicker]="pickerpassingDate" formControlName="passDate" [min]="goodStandingForeignVerificationformGroup.controls['joinDate'].value" [max]="maxDate">
@@ -249,7 +283,7 @@
                                         </mat-form-field>
                                         <!-- </div> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
-                                        <h4>{{labels.placeOfWork}}</h4>
+                                        <h4>{{labels.placeOfWork}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline" class="work-details">
                                             <textarea matInput placeholder="Place Of Work"
                                                 formControlName="placeOfWork"></textarea>
@@ -258,7 +292,7 @@
                                             </mat-error>
                                         </mat-form-field>
                                         <div >
-                                            <h4>{{labels.uploadPhoto}}</h4> 
+                                            <h4>{{labels.uploadPhoto}}<i style="color: red;">*</i></h4> 
                                             <div class="upload-pic-ui" >
                                                 <div *ngIf="filePreview">
                                                     {{filePreview.name}}
@@ -273,13 +307,13 @@
                                                         </a>
                                                     </label>
                                                     <input type="file" id="fileUpload2" style="display: none;" enctype="multipart/form-data"
-                                                        (change)="onProfileChanged($event)" accept=".pdf,.docx,.jpeg, .png, .jpg" />
+                                                        (change)="onProfileChanged($event)" accept=".jpeg, .png, .jpg" />
                                                 </div>
                                         
                                             </div>
                                         </div>
                                         <!-- </div> -->
-                                        <h4>Attach file(s)*</h4>
+                                        <h4>Attach file(s)<i style="color: red;">*</i></h4>
 
                                         <div class="upload-column">
                                             <!-- <div class="flex flex-column mt1"> -->

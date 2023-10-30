@@ -39,7 +39,7 @@
                                         <!-- <div class="applicant-details">-->
                                             <div class="pr-details" >
                                                 <div class="person-details">
-                                                    <h4>{{labels.applicantName}}</h4>
+                                                    <h4>{{labels.applicantName}}<i style="color: red;">*</i></h4>
                                                     <mat-form-field appearance="outline" >
                                                         <input matInput placeholder="Applicant Name" formControlName="applicantName">
                                                         <mat-error *ngIf="newRegCertDetailsformGroup.controls['applicantName'].invalid">
@@ -76,7 +76,7 @@
                                                 
                                             </div> -->
                                             <div class="applicant-details">
-                                            <h4>{{labels.mobNumber}}</h4>
+                                            <h4>{{labels.mobNumber}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Mobile Number" formControlName="mobNumber">
                                                 <mat-error *ngIf="newRegCertDetailsformGroup.controls['mobNumber'].invalid">
@@ -86,7 +86,7 @@
                                         <!-- </div> -->
                                         <div>
                                             <div>
-                                                <h4>{{labels.email}} </h4>
+                                                <h4>{{labels.email}}<i style="color: red;">*</i> </h4>
                                                 <mat-form-field appearance="outline" >
                                                     <input matInput placeholder="Email ID" formControlName="email">
                                                     <mat-error *ngIf="newRegCertDetailsformGroup.controls['email'].invalid">
@@ -101,7 +101,7 @@
                                         
                                         </mat-divider> -->
                                         <!-- <div class="ml4 flex flex-column"> -->
-                                            <h4>{{labels.fatherName}}</h4>
+                                            <h4>{{labels.fatherName}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline" >
                                                 <input matInput placeholder="Father's Name" formControlName="fatherName">
                                                 <mat-error *ngIf="newRegCertDetailsformGroup.controls['fatherName'].invalid">
@@ -111,7 +111,7 @@
 
                                     
                                         <div>
-                                            <h4>{{labels.motherName}}</h4>
+                                            <h4>{{labels.motherName}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Mother's Name" formControlName="motherName">
                                                 <mat-error *ngIf="newRegCertDetailsformGroup.controls['motherName'].invalid">
@@ -119,7 +119,7 @@
                                             </mat-form-field>
                                         </div>
                                         <!-- <div class="ml4 flex flex-column"> -->
-                                            <h4>{{labels.dob}}</h4>
+                                            <h4>{{labels.dob}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
 
                                                 <mat-label>Choose a date</mat-label>
@@ -131,7 +131,7 @@
                                                 <mat-datepicker #picker></mat-datepicker>
                                             </mat-form-field>
                                             <div>
-                                                <h4>{{labels.credType}}</h4>
+                                                <h4>{{labels.credType}}<i style="color: red;">*</i></h4>
                                                 <mat-form-field appearance="outline">
                                                     <!-- <input matInput placeholder="State" formControlName="state"> -->
                                                     <mat-select (selectionChange)="credTypeSelected($event)" formControlName="credType">
@@ -147,7 +147,7 @@
                                         <!-- </div> -->
                                         <div [ngClass]="{ 'invalid-field': submitted && newRegCertDetailsformGroup.controls['gender'].errors }">
                                             <!-- <div class=" mt3 "> -->
-                                                <h4 >{{labels.gender}} </h4>
+                                                <h4 >{{labels.gender}} <i style="color: red;">*</i></h4>
                                                 <mat-radio-group color="primary"  formControlName="gender">
                                                     <span *ngFor='let origin of genderTypesArray;let i = index'>
                                                         <mat-radio-button [value]="origin"
@@ -161,7 +161,7 @@
                                         <div class="place-details">
                                             <!-- <div class=" flex flex-column mr2"> -->
                                                 <div class="address-details">
-                                                    <h4>{{labels.al1}}</h4>
+                                                    <h4>{{labels.al1}}<i style="color: red;">*</i></h4>
                                                     <mat-form-field appearance="outline" >
                                                         <input matInput placeholder="Address Line 1" formControlName="al1">
                                                         <mat-error *ngIf="newRegCertDetailsformGroup.controls['al1'].invalid">
@@ -184,7 +184,7 @@
                                         </div>
                                         <div class="place-details">
                                                 <div class="address-details">
-                                                    <h4>{{labels.district}}</h4>
+                                                    <h4>{{labels.district}}<i style="color: red;">*</i></h4>
                                                     <mat-form-field appearance="outline">
                                                         <input matInput placeholder="District" formControlName="district">
                                                         <mat-error *ngIf="newRegCertDetailsformGroup.controls['district'].invalid">
@@ -194,7 +194,7 @@
 
 
                                                 <div class="address-details">
-                                                    <h4>{{labels.state}} </h4>
+                                                    <h4>{{labels.state}}<i style="color: red;">*</i> </h4>
                                                     <mat-form-field appearance="outline">
                                                         <!-- <input matInput placeholder="State" formControlName="state"> -->
                                                         <mat-select (selectionChange)="stateTypeSelected($event)" formControlName="state">
@@ -222,7 +222,7 @@
                                         </div>
                                         <div class="place-details">
                                                 <div class="address-details">
-                                                    <h4>{{labels.pin}} </h4>
+                                                    <h4>{{labels.pin}} <i style="color: red;">*</i></h4>
                                                     <mat-form-field appearance="outline">
                                                         <input matInput placeholder="Pincode" formControlName="pin">
                                                         <mat-error *ngIf="newRegCertDetailsformGroup.controls['pin'].invalid">
@@ -232,7 +232,7 @@
 
 
                                                 <div class="address-details">
-                                                    <h4>{{labels.country}} </h4>
+                                                    <h4>{{labels.country}} <i style="color: red;">*</i></h4>
                                                     <mat-form-field appearance="outline">
                                                         <input matInput placeholder="Country" formControlName="country">
                                                         <mat-error *ngIf="newRegCertDetailsformGroup.controls['country'].invalid">
@@ -244,14 +244,14 @@
                                         
                                         <div class="applicant-details">
                                             <div>
-                                                <h4>{{labels.adhr}} </h4>
+                                                <h4>{{labels.adhr}} <i style="color: red;">*</i></h4>
                                                 <mat-form-field appearance="outline"    >
                                                     <input matInput placeholder="Aadhar Number" formControlName="adhr">
                                                     <mat-error *ngIf="newRegCertDetailsformGroup.controls['adhr'].invalid">
                                                     </mat-error>
                                                 </mat-form-field>
                                             </div>
-                                            <h4>{{labels.uploadSignature}}</h4>
+                                            <h4>{{labels.uploadSignature}}<i style="color: red;">*</i></h4>
                                             <div class="upload-pic-ui">
                                                <div *ngIf="fileSignPreview">
                                                    {{fileSignPreview.name}}
@@ -273,7 +273,7 @@
 
                                         <!-- </div> -->
                                         <div >
-                                            <h4>{{labels.uploadPhoto}}</h4>
+                                            <h4>{{labels.uploadPhoto}}<i style="color: red;">*</i></h4>
                                             <div class="upload-pic-ui">
                                                 <div *ngIf="filePreview">
                                                     {{filePreview.name}}
@@ -337,7 +337,7 @@
                                         
 
                                         <div class="applicant-details">
-                                            <h4>{{labels.courseName}}</h4>
+                                            <h4>{{labels.courseName}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance ="outline">
                                                 <mat-label>Course Name</mat-label>
                                               <mat-select (selectionChange)="requestTypeSelected($event)" formControlName="courseName">
@@ -352,7 +352,7 @@
                                             </mat-form-field> -->
                                         </div>
                                         <div class="applicant-details slc">
-                                            <h4>{{labels.requestType}}</h4>
+                                            <h4>{{labels.requestType}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance ="outline">
                                                 <mat-label>Request Type</mat-label>
                                               <mat-select  formControlName="requestType">
@@ -364,14 +364,14 @@
                                         </div>
 
                                         <div class="applicant-details" *ngIf="isFieldShow">
-                                            <h4>{{labels.mrdName}}</h4>
+                                            <h4>{{labels.mrdName}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder=" Enter Married Name" formControlName="marriedName" required>
                                             
                                             </mat-form-field>
                                         </div>
                                         <div class="applicant-details" *ngIf="isFieldShow">
-                                            <h4>{{labels.qualification}}</h4>
+                                            <h4>{{labels.qualification}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Enter Qualification" formControlName="qualificationName" required>
                                             
@@ -382,14 +382,14 @@
                                         
 
                                         <div class="applicant-details">
-                                            <h4>{{labels.collegeName}}</h4>
+                                            <h4>{{labels.collegeName}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="College Name" formControlName="collegeName">
                                             
                                             </mat-form-field>
                                         </div>
                                         <div class="applicant-details">
-                                            <h4>{{labels.university}}</h4>
+                                            <h4>{{labels.university}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="University Name" formControlName="university">
                                             
@@ -397,7 +397,7 @@
                                         </div>
 
                                         <div class="applicant-details">
-                                            <h4>{{labels.examBody}}</h4>
+                                            <h4>{{labels.examBody}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Examination Body" formControlName="examBody">
                                             
@@ -405,7 +405,7 @@
                                         </div>
 
                                         <div class="applicant-details">
-                                            <h4>{{labels.rollNum}}</h4>
+                                            <h4>{{labels.rollNum}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <input matInput placeholder="Final year roll number" formControlName="rollNum">
                                             
@@ -419,7 +419,7 @@
                                         </div> -->
 
                                         <div class="applicant-details">
-                                            <h4>{{labels.joinDate}}</h4>
+                                            <h4>{{labels.joinDate}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
 
                                                 <mat-label>Choose a date</mat-label>
@@ -431,7 +431,7 @@
                                         </div>
 
                                         <div class="applicant-details">
-                                            <h4>{{labels.passDate}}</h4>
+                                            <h4>{{labels.passDate}}<i style="color: red;">*</i></h4>
                                             <mat-form-field appearance="outline">
                                                 <mat-label>Choose a date</mat-label>
                                                 <input matInput [matDatepicker]="pickerpassingDate" formControlName="passDate" [min]="newRegCourseDetailsformGroup.controls['joinDate'].value" [max]="maxDate">
@@ -442,7 +442,7 @@
 
                                         </div>
                                         <div class="applicant-details">
-                                            <h4>{{labels.attach}}*</h4>
+                                            <h4>{{labels.attach}}<i style="color: red;">*</i></h4>
                                             <div class="upload-column">
                                                 <!-- <div class="flex flex-column mt1"> -->
                                                 <!-- </div> -->
