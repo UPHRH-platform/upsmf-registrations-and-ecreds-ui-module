@@ -96,6 +96,7 @@ export class AdminGoodStandingForeignVerificationComponent {
 
 
   ];
+  isGoodStanding: boolean = false;
 
   activity: Observable<any>;
 
@@ -135,6 +136,7 @@ export class AdminGoodStandingForeignVerificationComponent {
     console.log("status",this.ecStatus)
     console.log("entity", this.entity)
     if (this.entity === "StudentGoodstanding" && this.userEmail === "Regulator") {
+      this.isGoodStanding =  true
       this.baseService.getCandidatePersonalDetailsRegulator$(this.entity,this.osid)
         .subscribe(
           (response: any) => {
@@ -197,7 +199,16 @@ export class AdminGoodStandingForeignVerificationComponent {
               proQual: response.responseData.professionalQualification,
               joinDate: response.responseData.joiningDate,
               passDate: response.responseData.courseDate,
-              council: response.responseData.council
+              council: response.responseData.council,
+              registrationIssueDate: response.responseData.registrationIssueDate,
+              courseName: response.responseData.courseName,
+              instituteName: response.responseData.instituteName,
+              universityName: response.responseData.universityName
+
+
+
+
+
             });
           });
     }
@@ -275,7 +286,15 @@ export class AdminGoodStandingForeignVerificationComponent {
               proQual: response.responseData.professionalQualification,
               joinDate: response.responseData.joiningYear + "-" + jm + "-01",
               passDate: response.responseData.passingYear + "-" + pm + "-01",
-              council: response.responseData.council
+              council: response.responseData.council,
+              foreignCouncilName:response.responseData.foreignCouncilName,
+              councilAddress: response.responseData.foreignCouncilAddress,
+              councilCountry: response.responseData.foreignCouncilCountry,
+              registrationIssueDate: response.responseData.registrationIssueDate
+
+
+
+
 
             });
           });
@@ -330,7 +349,14 @@ export class AdminGoodStandingForeignVerificationComponent {
       mobNumber: new FormControl('', [
         Validators.required,
         Validators.pattern("^(0|91)?[6-9][0-9]{9}$")]),
-      council: new FormControl('', [Validators.required])
+      council: new FormControl('', [Validators.required]),
+      foreignCouncilName: new FormControl(''),
+      councilAddress: new FormControl(''),
+      councilCountry: new FormControl(''),
+      registrationIssueDate: new FormControl('',[Validators.required]),
+      universityName: new FormControl(''),
+      instituteName: new FormControl(''),
+      courseName: new FormControl('')
     });
     this.goodStandingForeignVerificationformGroup.disable();
     { { (this.stateData.body.entity === "StudentForeignVerification" ? this.getCandidatePersonalDetailsForeign() : this.getCandidatePersonalDetails()) } }

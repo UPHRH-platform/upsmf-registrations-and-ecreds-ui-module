@@ -34,7 +34,13 @@ export const applabels = {
     uploadPhoto: "Upload Photo",
     uploadSignature:"Upload Signature",
     qualification: "Qualification",
-    council:"Council"
+    council:"Council",
+    ForeignCouncilName:"Foreign Council Name",
+    ForeignCouncilAddress :"Foreign Council Address",
+    ForeignCouncilCountry:"Foreign Council Country",
+    registrationIssueDate: "Registration Issue Date",
+    InstituteName: "Institute Name",
+   
     
 
 
