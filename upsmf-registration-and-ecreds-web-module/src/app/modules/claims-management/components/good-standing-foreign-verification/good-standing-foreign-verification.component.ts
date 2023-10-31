@@ -216,9 +216,7 @@ export class GoodStandingForeignVerificationComponent {
             this.candidateDetailList = response.responseData
             this.councilList = ['UPNC','UPMC','UPDC']
             this.isGoodStanding = true;
-            this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.clearValidators();
-            this.goodStandingForeignVerificationformGroup.get('councilAddress')?.clearValidators();
-           this.goodStandingForeignVerificationformGroup.get('councilCountry')?.clearValidators();
+            this.getGoodStandingValidators()
             console.log("det", this.candidateDetailList[0])
             this.osid = this.candidateDetailList[0].osid;
             this.urlDataResponse = this.candidateDetailList[0].docproof;
@@ -279,7 +277,11 @@ export class GoodStandingForeignVerificationComponent {
               joinDate: this.candidateDetailList[0].joiningDate,
               passDate: this.candidateDetailList[0].courseDate,
               council: this.candidateDetailList[0].council,
-              registrationIssueDate: this.candidateDetailList[0].registrationIssueDate
+              registrationIssueDate: this.candidateDetailList[0].registrationIssueDate,
+              universityName:this.candidateDetailList[0].universityName,
+              instituteName: this.candidateDetailList[0].instituteName,
+              courseName: this.candidateDetailList[0].courseName
+
               
 
             });
@@ -288,6 +290,22 @@ export class GoodStandingForeignVerificationComponent {
           }
         );
     }
+  }
+  getGoodStandingValidators() {
+    this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.clearValidators();
+    this.goodStandingForeignVerificationformGroup.get('councilAddress')?.clearValidators();
+    this.goodStandingForeignVerificationformGroup.get('councilCountry')?.clearValidators();
+    this.goodStandingForeignVerificationformGroup.get('universityName')?.setValidators(Validators.required)
+    this.goodStandingForeignVerificationformGroup.get('instituteName')?.setValidators(Validators.required)
+    this.goodStandingForeignVerificationformGroup.get('courseName')?.setValidators(Validators.required)
+  }
+  getForeignVerificationValidators() {
+    this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.setValidators(Validators.required)
+    this.goodStandingForeignVerificationformGroup.get('councilAddress')?.setValidators(Validators.required)
+    this.goodStandingForeignVerificationformGroup.get('councilCountry')?.setValidators(Validators.required)
+    this.goodStandingForeignVerificationformGroup.get('universityName')?.clearValidators()
+    this.goodStandingForeignVerificationformGroup.get('instituteName')?.clearValidators()
+    this.goodStandingForeignVerificationformGroup.get('courseName')?.clearValidators()
   }
   getCandidatePersonalDetailsForeign() {
     console.log("getting getCandidatePersonalDetails")
@@ -366,9 +384,7 @@ export class GoodStandingForeignVerificationComponent {
             this.getRejectReasonStudent()
             this.candidateDetailList = response.responseData
             this.councilList = ['UPNC']
-            this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.setValidators(Validators.required)
-            this.goodStandingForeignVerificationformGroup.get('councilAddress')?.setValidators(Validators.required)
-            this.goodStandingForeignVerificationformGroup.get('councilCountry')?.setValidators(Validators.required)
+            this.getForeignVerificationValidators()
             console.log("det", this.candidateDetailList[0])
             this.osid = this.candidateDetailList[0].osid;
             this.urlDataResponse = this.candidateDetailList[0].docproof;
@@ -494,7 +510,12 @@ export class GoodStandingForeignVerificationComponent {
       foreignCouncilName: new FormControl(''),
       councilAddress: new FormControl(''),
       councilCountry: new FormControl(''),
-      registrationIssueDate: new FormControl('',[Validators.required])
+      registrationIssueDate: new FormControl('',[Validators.required]),
+      universityName: new FormControl(''),
+      instituteName: new FormControl(''),
+      courseName: new FormControl('')
+
+
 
       // fileAttach: new FormControl('')
     });
@@ -861,7 +882,10 @@ export class GoodStandingForeignVerificationComponent {
         // "passingYear": passYear.toString(),
         "joiningDate":this.datePipe.transform(this.goodStandingForeignVerificationformGroup.get('joinDate')?.value, "yyyy-MM-dd")?.toString(),
         "courseDate" : this.datePipe.transform(this.goodStandingForeignVerificationformGroup.get('passDate')?.value,"yyyy-MM-dd")?.toString(),
-        "registrationIssueDate":this.datePipe.transform(this.goodStandingForeignVerificationformGroup.value.registrationIssueDate,"yyyy-MM-dd")?.toString()
+        "registrationIssueDate":this.datePipe.transform(this.goodStandingForeignVerificationformGroup.value.registrationIssueDate,"yyyy-MM-dd")?.toString(),
+        "universityName": this.goodStandingForeignVerificationformGroup.value.universityName,
+        "instituteName": this.goodStandingForeignVerificationformGroup.value.instituteName,
+        "courseName": this.goodStandingForeignVerificationformGroup.value.courseName
         // "university":'NA'
 
 
@@ -1178,18 +1202,21 @@ export class GoodStandingForeignVerificationComponent {
       case 'goodStandingCert':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_GOODSTANDING
         this.councilList = ['UPNC','UPMC','UPDC']
-        this.isGoodStanding =  true
-        this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.clearValidators();
-        this.goodStandingForeignVerificationformGroup.get('councilAddress')?.clearValidators();
-        this.goodStandingForeignVerificationformGroup.get('councilCountry')?.clearValidators();
+        this.isGoodStanding =  true;
+        this.getGoodStandingValidators()
+        // this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.clearValidators();
+        // this.goodStandingForeignVerificationformGroup.get('councilAddress')?.clearValidators();
+        // this.goodStandingForeignVerificationformGroup.get('councilCountry')?.clearValidators();
 
         break;
       case 'ForeignVerifyReq':
         this.endPointUrl = this.configService.urlConFig.URLS.STUDENT.GET_STUDENT_DETAILS_FOREIGNVARIFIVATION
-        this.councilList = ['UPNC']
-        this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.setValidators(Validators.required)
-        this.goodStandingForeignVerificationformGroup.get('councilAddress')?.setValidators(Validators.required)
-        this.goodStandingForeignVerificationformGroup.get('councilCountry')?.setValidators(Validators.required)
+        this.councilList = ['UPNC'];
+        this.getForeignVerificationValidators()
+
+        // this.goodStandingForeignVerificationformGroup.get('foreignCouncilName')?.setValidators(Validators.required)
+        // this.goodStandingForeignVerificationformGroup.get('councilAddress')?.setValidators(Validators.required)
+        // this.goodStandingForeignVerificationformGroup.get('councilCountry')?.setValidators(Validators.required)
         break;
       case 'Regulator':
         // this.router.navigate(['claims/new-regn-cert'])

@@ -200,7 +200,13 @@ export class AdminGoodStandingForeignVerificationComponent {
               joinDate: response.responseData.joiningDate,
               passDate: response.responseData.courseDate,
               council: response.responseData.council,
-              registrationIssueDate: response.responseData.registrationIssueDate
+              registrationIssueDate: response.responseData.registrationIssueDate,
+              courseName: response.responseData.courseName,
+              instituteName: response.responseData.instituteName,
+              universityName: response.responseData.universityName
+
+
+
 
 
             });
@@ -347,7 +353,10 @@ export class AdminGoodStandingForeignVerificationComponent {
       foreignCouncilName: new FormControl(''),
       councilAddress: new FormControl(''),
       councilCountry: new FormControl(''),
-      registrationIssueDate: new FormControl('',[Validators.required])
+      registrationIssueDate: new FormControl('',[Validators.required]),
+      universityName: new FormControl(''),
+      instituteName: new FormControl(''),
+      courseName: new FormControl('')
     });
     this.goodStandingForeignVerificationformGroup.disable();
     { { (this.stateData.body.entity === "StudentForeignVerification" ? this.getCandidatePersonalDetailsForeign() : this.getCandidatePersonalDetails()) } }

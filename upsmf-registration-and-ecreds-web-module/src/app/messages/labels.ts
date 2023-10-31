@@ -38,7 +38,9 @@ export const applabels = {
     ForeignCouncilName:"Foreign Council Name",
     ForeignCouncilAddress :"Foreign Council Address",
     ForeignCouncilCountry:"Foreign Council Country",
-    registrationIssueDate: "Registration Issue Date"
+    registrationIssueDate: "Registration Issue Date",
+    InstituteName: "Institute Name",
+   
     
 
 

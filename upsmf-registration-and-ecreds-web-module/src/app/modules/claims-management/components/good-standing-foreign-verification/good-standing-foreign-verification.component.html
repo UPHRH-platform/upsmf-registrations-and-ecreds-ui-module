@@ -130,7 +130,7 @@
                                             <!-- <div> -->
                                             <h4>{{labels.state}}<i style="color: red;">*</i> </h4>
                                             <mat-form-field appearance="outline">
-                                                <mat-select (selectionChange)="stateTypeSelected($event)" formControlName="state">
+                                                <mat-select  formControlName="state">
                                                     <span *ngFor='let state of stateList;let i = index'>
                                                         <mat-option [value]="state">{{state}}</mat-option>
                                                     </span>
@@ -220,6 +220,31 @@
                                                 *ngIf="goodStandingForeignVerificationformGroup.controls['council'].invalid">
                                             </mat-error>
                                         </mat-form-field>
+                                        <span *ngIf="isGoodStanding">
+                                            <h4>{{labels.university}}<i style="color: red;">*</i></h4>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput placeholder="University Name" formControlName="universityName">
+                                                <mat-error
+                                                    *ngIf="goodStandingForeignVerificationformGroup.controls['universityName'].invalid">
+                                                </mat-error>
+                                            </mat-form-field>
+    
+                                            <h4>{{labels.InstituteName}}<i style="color: red;">*</i></h4>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput placeholder="Institute Name" formControlName="instituteName">
+                                                <mat-error
+                                                    *ngIf="goodStandingForeignVerificationformGroup.controls['instituteName'].invalid">
+                                                </mat-error>
+                                            </mat-form-field>
+    
+                                            <h4>{{labels.courseName}}<i style="color: red;">*</i></h4>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput placeholder="Course Name" formControlName="courseName">
+                                                <mat-error
+                                                    *ngIf="goodStandingForeignVerificationformGroup.controls['courseName'].invalid">
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </span>
                                         <span *ngIf="!isGoodStanding">
                                         <h4>{{labels.ForeignCouncilName}}<i style="color: red;">*</i></h4>
                                         <mat-form-field appearance="outline">
