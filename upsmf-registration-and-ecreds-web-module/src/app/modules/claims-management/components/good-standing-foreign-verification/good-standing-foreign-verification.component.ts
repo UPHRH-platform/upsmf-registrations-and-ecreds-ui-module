@@ -844,6 +844,9 @@ export class GoodStandingForeignVerificationComponent {
 
       const joinMonth = this.months[jMonth];
       const passMonth = this.months[pMonth];
+
+      const curryear = new Date().getFullYear() % 100;
+      
       console.log("joinmonth", joinMonth)
       this.urlList = this.updatedUrlList ? this.updatedUrlList : ''
       //convert to string with commaa separated
@@ -885,7 +888,8 @@ export class GoodStandingForeignVerificationComponent {
         "registrationIssueDate":this.datePipe.transform(this.goodStandingForeignVerificationformGroup.value.registrationIssueDate,"yyyy-MM-dd")?.toString(),
         "universityName": this.goodStandingForeignVerificationformGroup.value.universityName,
         "instituteName": this.goodStandingForeignVerificationformGroup.value.instituteName,
-        "courseName": this.goodStandingForeignVerificationformGroup.value.courseName
+        "courseName": this.goodStandingForeignVerificationformGroup.value.courseName,
+        "refNoYear": curryear.toString()
         // "university":'NA'
 
 
